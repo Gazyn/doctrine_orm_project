@@ -22,7 +22,7 @@ class Author{
 
 	/**
 	* @OneToMany(targetEntity="Article", mappedBy="author")
-	* @OrderBy({"publiched" = "DESC"})
+	* @OrderBy({"published" = "DESC"})
 	*/
 	private $articles;
 
