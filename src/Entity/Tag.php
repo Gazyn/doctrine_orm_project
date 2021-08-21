@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
 * @Entity
 */
-class Author{
+class Tag {
 	/**
 	* @Column(type="integer")
 	* @Id
@@ -19,15 +19,15 @@ class Author{
 	* @Column(type="string")
 	*/
 	private $name;
-
 	/**
-	* @OneToMany(targetEntity="Article", mappedBy="author")
-	* @OrderBy({"published" = "DESC"})
+	* @ManyToMany(targetEntity="Article", mappedBy="tags", cascade={"persist"})
+	* @JoinTable(name="article_tags")
+	* @JoinColumn(referencedColumnName="id", nullable=false)
 	*/
 	private $articles;
 
 	public function __construct(){
-		$this->articles = new ArrayCollection;
+		$this->articles = new ArrayCollection();
 	}
 
 	public function getId(){
@@ -45,8 +45,8 @@ class Author{
 	public function setName($value){
 		$this->name = $value;
 	}
-
+	
 	public function getArticles(){
 		return $this->articles;
 	}
-}
+} 
